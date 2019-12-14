@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Pulumi;
+using Pulumi.Azure.AppService;
+using Pulumi.Azure.AppService.Inputs;
 using Pulumi.Azure.Core;
 using Pulumi.Azure.Storage;
 
@@ -13,21 +15,36 @@ namespace Infra
             return Deployment.RunAsync(() => {
 
                 // Create an Azure Resource Group
-                var resourceGroup = new ResourceGroup("resourceGroup");
+                var resourceGroup = new ResourceGroup("rgspeedruns");
 
-                // Create an Azure Storage Account
-                var storageAccount = new Account("storage", new AccountArgs
+                var appServicePlan = new Plan("sp-Speedruns", new PlanArgs
                 {
+                    Location = "UKSouth",
+                    Kind = "FunctionApp",
                     ResourceGroupName = resourceGroup.Name,
-                    AccountReplicationType = "LRS",
-                    AccountTier = "Standard",
+                    Sku = new PlanSkuArgs
+                    {
+                        Tier = "Dynamic",
+                        Size = "Y1"
+                    }
                 });
 
-                // Export the connection string for the storage account
-                return new Dictionary<string, object>
+                var storageAccount = new Account("SpeedStorage", new AccountArgs
                 {
-                    { "connectionString", storageAccount.PrimaryConnectionString },
-                };
+                    AccountKind = "Storage",
+                    AccountTier = "Standard",
+                    AccountReplicationType = "LRS",
+                    ResourceGroupName = resourceGroup.Name,
+                });
+
+                var updateRunnerApp = new FunctionApp("fn-UpdateRunners", new FunctionAppArgs
+                {
+                    AppServicePlanId = appServicePlan.Id,
+                    ResourceGroupName = resourceGroup.Name,
+                    StorageConnectionString = storageAccount.PrimaryConnectionString
+                });
+
+                return new Dictionary<string, object?> { };
             });
         }
     }
