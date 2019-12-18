@@ -13,4 +13,10 @@
     <PackageReference Include="coverlet.collector" Version="1.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.AspNetCore.Components.Testing\Microsoft.AspNetCore.Components.Testing.csproj" />
+    <ProjectReference Include="..\Speedruns.Web\Client\Speedruns.Web.Client.csproj" />
+    <ProjectReference Include="..\Speedruns.Web\Shared\Speedruns.Web.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -13,4 +13,9 @@
     <PackageReference Include="coverlet.collector" Version="1.0.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Speedruns.Web\Server\Speedruns.Web.Server.csproj" />
+    <ProjectReference Include="..\Speedruns.Web\Shared\Speedruns.Web.Shared.csproj" />
+  </ItemGroup>
+
 </Project>
