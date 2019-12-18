@@ -5,23 +5,25 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microsoft.AspNetCore.Components.Testing", "Microsoft.AspNetCore.Components.Testing\Microsoft.AspNetCore.Components.Testing.csproj", "{DB281B9C-2674-4AAE-B952-9BA934413F96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Speedruns.Web.Server", "..\Speedruns.Web\Server\Speedruns.Web.Server.csproj", "{D8FA8D53-2D34-4373-91F9-FDFEFC820C01}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Speedruns.Web.Server", "Speedruns.Web\Server\Speedruns.Web.Server.csproj", "{D8FA8D53-2D34-4373-91F9-FDFEFC820C01}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Speedruns.Web.Client", "..\Speedruns.Web\Client\Speedruns.Web.Client.csproj", "{CDDB68B4-8494-4D38-932B-B96D3EF6F2D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Speedruns.Web.Client", "Speedruns.Web\Client\Speedruns.Web.Client.csproj", "{CDDB68B4-8494-4D38-932B-B96D3EF6F2D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Speedruns.Web.Shared", "..\Speedruns.Web\Shared\Speedruns.Web.Shared.csproj", "{951144BC-6B80-4F2F-B6A8-63472F6D8E95}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Speedruns.Web.Shared", "Speedruns.Web\Shared\Speedruns.Web.Shared.csproj", "{951144BC-6B80-4F2F-B6A8-63472F6D8E95}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{61F1D23B-7686-4E78-BE59-5D50563E2070}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Speedruns.Web.Server.Tests", "..\Speedruns.Web.Server.Tests\Speedruns.Web.Server.Tests.csproj", "{0F3CAEB8-E3F9-4DCB-B0E7-9B7847D05152}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Speedruns.Web.Server.Tests", "Speedruns.Web.Server.Tests\Speedruns.Web.Server.Tests.csproj", "{0F3CAEB8-E3F9-4DCB-B0E7-9B7847D05152}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Speedruns.Web.Client.Tests", "..\Speedruns.Web.Client.Tests\Speedruns.Web.Client.Tests.csproj", "{BA0438D6-E39F-4974-9872-2CB9C6766124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Speedruns.Web.Client.Tests", "Speedruns.Web.Client.Tests\Speedruns.Web.Client.Tests.csproj", "{BA0438D6-E39F-4974-9872-2CB9C6766124}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Speedruns.Runners", "..\Speedruns.Runners\Speedruns.Runners.csproj", "{B63BF5CF-11C5-4FDD-A3FA-27A138807C12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Speedruns.Runners", "Speedruns.Runners\Speedruns.Runners.csproj", "{B63BF5CF-11C5-4FDD-A3FA-27A138807C12}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ThirdParty", "ThirdParty", "{C2AEAA29-7477-411C-96CD-3BD51DB87D1C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Speedruns.Runners.Tests", "..\Speedruns.Runners.Tests\Speedruns.Runners.Tests.csproj", "{D778976A-5434-4C6A-935A-AAE5AD4A0CCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Speedruns.Runners.Tests", "Speedruns.Runners.Tests\Speedruns.Runners.Tests.csproj", "{D778976A-5434-4C6A-935A-AAE5AD4A0CCF}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E403A68D-AF9A-40AA-9D96-982C45B15339}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{D778976A-5434-4C6A-935A-AAE5AD4A0CCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D778976A-5434-4C6A-935A-AAE5AD4A0CCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D778976A-5434-4C6A-935A-AAE5AD4A0CCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E403A68D-AF9A-40AA-9D96-982C45B15339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E403A68D-AF9A-40AA-9D96-982C45B15339}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E403A68D-AF9A-40AA-9D96-982C45B15339}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E403A68D-AF9A-40AA-9D96-982C45B15339}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

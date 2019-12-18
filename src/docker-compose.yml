@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  speedruns.web.server:
+    image: ${DOCKER_REGISTRY-}speedrunswebserver
+    build:
+      context: .
+      dockerfile: Speedruns.Web/Server/Dockerfile
