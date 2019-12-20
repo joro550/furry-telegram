@@ -6,7 +6,7 @@ namespace Speedruns.Runners.Tests.CoreFakes
 {
     public class TestQuery : Query<int>
     {
-        public override Task<int> Execute(IStore getStore) 
+        public override Task<int> Execute(IStore store) 
             => Task.FromResult(1);
     }
 }

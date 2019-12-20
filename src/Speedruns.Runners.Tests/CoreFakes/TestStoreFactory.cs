@@ -1,5 +1,6 @@
 ﻿using Xunit;
 using Speedruns.Runners.Stores;
+using Speedruns.Runners.Stores.Factories;
 
 namespace Speedruns.Runners.Tests.CoreFakes
 {

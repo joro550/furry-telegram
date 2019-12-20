@@ -1,5 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Speedruns.Runners.Stores;
+using Speedruns.Runners.Stores.Factories;
+using Speedruns.Runners.Stores.Settings;
 using Speedruns.Runners.Tests.CoreFakes;
 using Xunit;
 
@@ -29,15 +33,14 @@ namespace Speedruns.Runners.Tests
 
     public class InMemoryDatabaseSettings : Settings
     {
-        public override StoreFactory CreateStoreFactory()
-        {
-            return null;
-        }
+        public override StoreFactory CreateStoreFactory() =>
+            new ContextStoreFactory(new DbContextOptionsBuilder<Context>()
+                .UseInMemoryDatabase(Guid.NewGuid().ToString())
+                .Options);
     }
 
     public static class SettingsBuilderExtensions
     {
-
         public static Settings UseInMemoryDatabase(this SettingsBuilder builder)
         {
             return new InMemoryDatabaseSettings();

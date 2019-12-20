@@ -1,4 +1,4 @@
-﻿namespace Speedruns.Runners.Stores
+﻿namespace Speedruns.Runners.Stores.Settings
 {
     public class SettingsBuilder
     {

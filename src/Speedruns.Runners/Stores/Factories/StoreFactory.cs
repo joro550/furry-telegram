@@ -1,12 +1,7 @@
-﻿namespace Speedruns.Runners.Stores
+﻿namespace Speedruns.Runners.Stores.Factories
 {
     public abstract class StoreFactory
     {
         public abstract IStore GetStore();
-    }
-
-    public interface IStore
-    {
-
     }
 }

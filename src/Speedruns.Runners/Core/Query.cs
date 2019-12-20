@@ -5,6 +5,6 @@ namespace Speedruns.Runners.Core
 {
     public abstract class Query<T>
     {
-        public abstract Task<T> Execute(IStore getStore);
+        public abstract Task<T> Execute(IStore store);
     }
 }

@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using Speedruns.Runners.Core;
 using Speedruns.Runners.Stores;
+using Speedruns.Runners.Stores.Factories;
+using Speedruns.Runners.Stores.Settings;
 
 namespace Speedruns.Runners
 {

@@ -1,4 +1,5 @@
-﻿using Speedruns.Runners.Stores;
+﻿using Speedruns.Runners.Stores.Settings;
+using Speedruns.Runners.Stores.Factories;
 
 namespace Speedruns.Runners.Tests.CoreFakes
 {

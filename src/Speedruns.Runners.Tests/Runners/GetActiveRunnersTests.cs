@@ -10,15 +10,15 @@ namespace Speedruns.Runners.Tests.Runners
 {
     public class GetActiveRunnersTests
     {
-        [Fact]
-        public async Task WhenNoRunnersArePresent_ThenEmptyListIsReturned()
-        {
-            var factory = new TestContextFactory();
-            await using var context = factory.CreateInMemoryContext();
+        private readonly CommandRunner _commandRunner;
 
-            var command = new GetActiveRunners();
-            Assert.Empty(await command.Execute(context));
-        }
+        public GetActiveRunnersTests() =>
+            _commandRunner = new CommandRunner(
+                builder => builder.UseInMemoryDatabase());
+
+        [Fact]
+        public async Task WhenNoRunnersArePresent_ThenEmptyListIsReturned() 
+            => Assert.Empty(await _commandRunner.Execute(new GetActiveRunners()));
 
         public class GivenThereAreRunners
         {
