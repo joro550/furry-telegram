@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Xunit;
+using System;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using Speedruns.Runners.Stores;
-using Speedruns.Runners.Stores.Factories;
-using Speedruns.Runners.Stores.Settings;
+using Microsoft.EntityFrameworkCore;
 using Speedruns.Runners.Tests.CoreFakes;
-using Xunit;
+using Speedruns.Runners.Stores.Settings;
+using Speedruns.Runners.Stores.Factories;
 
 namespace Speedruns.Runners.Tests
 {
@@ -14,6 +14,7 @@ namespace Speedruns.Runners.Tests
         [Fact]
         public void WhenCreatingCommandRunner_ThenExtensionIsCalled()
         {
+            // ReSharper disable once UnusedVariable
             var commandRunner = new CommandRunner(builder => builder.UseTest(new TestStore()));
             Assert.True(TestBuilderExtensions.HasBeenCalled);
         }
@@ -41,9 +42,7 @@ namespace Speedruns.Runners.Tests
 
     public static class SettingsBuilderExtensions
     {
-        public static Settings UseInMemoryDatabase(this SettingsBuilder builder)
-        {
-            return new InMemoryDatabaseSettings();
-        }
+        public static Settings UseInMemoryDatabase(this SettingsBuilder builder) 
+            => new InMemoryDatabaseSettings();
     }
 }

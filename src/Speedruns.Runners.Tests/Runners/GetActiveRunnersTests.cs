@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Speedruns.Runners.Runners;
 using Speedruns.Runners.Entities;
 using Speedruns.Runners.Runners.Models;
+using Speedruns.Runners.Tests.Extensions;
 
 namespace Speedruns.Runners.Tests.Runners
 {
@@ -13,8 +14,7 @@ namespace Speedruns.Runners.Tests.Runners
         private readonly CommandRunner _commandRunner;
 
         public GetActiveRunnersTests() =>
-            _commandRunner = new CommandRunner(
-                builder => builder.UseInMemoryDatabase());
+            _commandRunner = new CommandRunner(builder => builder.UseInMemoryDatabase());
 
         [Fact]
         public async Task WhenNoRunnersArePresent_ThenEmptyListIsReturned() 

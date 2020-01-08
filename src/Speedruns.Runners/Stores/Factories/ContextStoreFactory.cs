@@ -7,13 +7,9 @@ namespace Speedruns.Runners.Stores.Factories
         private readonly DbContextOptions _options;
 
         public ContextStoreFactory(DbContextOptions options)
-        {
-            _options = options;
-        }
+            => _options = options;
 
-        public override IStore GetStore()
-        {
-            return new ContextStore(new Context(_options));
-        }
+        public override IStore GetStore() 
+            => new ContextStore(new Context(_options));
     }
 }

@@ -1,0 +1,16 @@
+﻿@page "/"
+@inject IJSRuntime JSRuntime;
+
+<div class='row'>
+    <div >
+        <div id='currentStream'></div>
+    </div>
+</div>
+
+    @code{
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            await JSRuntime.InvokeAsync<string>("twitchEmbed", "currentStream", "GamesDoneQuick");
+            await base.OnAfterRenderAsync(firstRender);
+        }
+    }

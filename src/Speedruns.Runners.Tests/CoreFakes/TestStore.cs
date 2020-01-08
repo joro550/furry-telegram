@@ -1,4 +1,5 @@
-﻿using Speedruns.Runners.Stores;
+﻿using System.Linq;
+using Speedruns.Runners.Stores;
 
 namespace Speedruns.Runners.Tests.CoreFakes
 {
@@ -8,6 +9,11 @@ namespace Speedruns.Runners.Tests.CoreFakes
 
         public TestStore()
         {
+        }
+
+        public IQueryable<T> GetEntities<T>() where T : class
+        {
+            return null;
         }
     }
 }

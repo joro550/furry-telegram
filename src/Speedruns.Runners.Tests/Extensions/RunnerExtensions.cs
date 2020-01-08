@@ -1,7 +1,7 @@
 ﻿using AutoFixture;
 using Speedruns.Runners.Entities;
 
-namespace Speedruns.Runners.Tests
+namespace Speedruns.Runners.Tests.Extensions
 {
     public static class RunnerExtensions
     {
