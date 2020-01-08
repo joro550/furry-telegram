@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Speedruns.Web.Data.Entities;
 using Microsoft.EntityFrameworkCore;
-using Speedruns.Web.Data.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Speedruns.Web.Data
 {
@@ -18,17 +15,12 @@ namespace Speedruns.Web.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<StreamEntity>()
                 .HasDiscriminator(entity => entity.Platform)
                 .HasValue<TwitchStreamEntity>("Twitch")
                 .HasValue<MixerStreamEntiy>("Mixer");
-        }
 
-        public override int SaveChanges()
-        {
-            return base.SaveChanges();
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

@@ -2,6 +2,8 @@
 
 @using Speedruns.Web.Data
 @inject StreamService StreamService
+@inject IJSRuntime JSRuntime;
+
 
 
 @if (_streams == null)
@@ -10,21 +12,33 @@
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Title</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var stream in _streams)
-            {
-                <tr>
-                    <td>@stream.Title</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+<div class="row">
+    <div class="l1"></div>
+    <div id="stream" class="l10 video-container"></div>
+    <div class="l1"></div>
+</div>
+
+    foreach (var stream in _streams)
+    {
+        <div class="col s12 m3">
+            <div class="card horizontal">
+                <div class="card-image">
+                    <img src="https://lorempixel.com/100/190/nature/6">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content">
+                        <span class="card-title grey-text text-darken-4">
+                            @stream.Username - @stream.Title
+                        </span>
+                        <p>@stream.Description</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 }
 
 @code {
@@ -33,5 +47,10 @@ else
     protected override async Task OnInitializedAsync()
     {
         _streams = await StreamService.Get();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await JSRuntime.InvokeVoidAsync("embedTwitch", "stream", "GamesDoneQuick");
     }
 }
