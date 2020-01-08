@@ -1,0 +1,37 @@
+﻿@page "/streams"
+
+@using Speedruns.Web.Data
+@inject StreamService StreamService
+
+
+@if (_streams == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var stream in _streams)
+            {
+                <tr>
+                    <td>@stream.Title</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private List<Stream> _streams;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _streams = await StreamService.Get();
+    }
+}

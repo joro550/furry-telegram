@@ -1,14 +1,13 @@
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Speedruns.Web.Areas.Identity;
-using Speedruns.Web.Users;
+using Speedruns.Web.Data;
 
 namespace Speedruns.Web
 {
@@ -23,17 +22,19 @@ namespace Speedruns.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options => 
                 options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            
+            services.AddDefaultIdentity<IdentityUser>(
+                    options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services
-                .AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>
-                >();
+            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
+
+            services.AddSingleton<WeatherForecastService>();
+            services.AddTransient<StreamService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -42,9 +43,6 @@ namespace Speedruns.Web
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-
-                CatalogContextSeed.SeedAsync(app)
-                    .Wait();
             }
             else
             {
@@ -66,31 +64,6 @@ namespace Speedruns.Web
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/_Host");
             });
-        }
-    }
-
-    public class CatalogContextSeed
-    {
-        public static async Task SeedAsync(IApplicationBuilder applicationBuilder)
-        {
-            // var context = (CatalogContext)applicationBuilder
-            //     .ApplicationServices.GetService(typeof(CatalogContext));
-            // using (context)
-            // {
-            //     context.Database.Migrate();
-            //     if (!context.CatalogBrands.Any())
-            //     {
-            //         context.CatalogBrands.AddRange(
-            //             GetPreconfiguredCatalogBrands());
-            //         await context.SaveChangesAsync();
-            //     }
-            //     if (!context.CatalogTypes.Any())
-            //     {
-            //         context.CatalogTypes.AddRange(
-            //             GetPreconfiguredCatalogTypes());
-            //         await context.SaveChangesAsync();
-            //     }
-            // }
         }
     }
 }
