@@ -1,10 +1,8 @@
-﻿@page "/streams"
+﻿@page "/streams/{streamName}"
 
 @using Speedruns.Web.Data
 @inject StreamService StreamService
-@inject IJSRuntime JSRuntime;
-
-
+@inject IJSRuntime JsRuntime;
 
 @if (_streams == null)
 {
@@ -16,7 +14,6 @@ else
         <div class="row">
             <div class="col s12 m12 l9 offset-l1">
                 <div id="stream" class="video-container">
-                    <iframe width="853" height="480" src="//www.youtube.com/embed/Q8TXgCzxEnw?rel=0" frameborder="0" allowfullscreen=""></iframe>
                 </div>
             </div>
         </div>
@@ -38,7 +35,7 @@ else
                             <p>@stream.Description</p>
                         </div>
                         <div class="card-action">
-                            <a href="#">This is a link</a>
+                            <a href="streams/{@stream.Username}">This is a link</a>
                         </div>
                     </div>
                 </div>
@@ -49,6 +46,9 @@ else
 }
 
 @code {
+    [Parameter]
+    public string StreamName { get; set; }
+
     private List<Stream> _streams;
 
     protected override async Task OnInitializedAsync()
@@ -56,8 +56,28 @@ else
         _streams = await StreamService.Get();
     }
 
-    // protected override async Task OnAfterRenderAsync(bool firstRender)
-    // {
-    //
-    // }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (string.IsNullOrEmpty(StreamName))
+        {
+            await ShowRandomStream();
+        }
+        else
+        {
+            var streamToShow = _streams.FirstOrDefault(stream => stream.Username == StreamName);
+            if(streamToShow == null)
+                await ShowRandomStream();
+            else
+                await ShowRandomStream();
+                // await streamToShow[randomNumber].PresentStream(JSRuntime, "stream");
+        }
+    }
+
+    private async Task ShowRandomStream()
+    {
+        var randomNumber = new Random()
+            .Next(0, _streams.Count);
+
+        // await _streams[randomNumber].PresentStream(JSRuntime, "stream");
+    }
 }
