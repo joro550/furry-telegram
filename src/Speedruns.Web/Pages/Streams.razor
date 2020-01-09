@@ -1,4 +1,5 @@
 ﻿@page "/streams/{streamName}"
+@page "/streams/"
 
 @using Speedruns.Web.Data
 @inject StreamService StreamService
@@ -68,8 +69,7 @@ else
             if(streamToShow == null)
                 await ShowRandomStream();
             else
-                await ShowRandomStream();
-                // await streamToShow[randomNumber].PresentStream(JSRuntime, "stream");
+                await streamToShow.PresentStream(JsRuntime, "stream");
         }
     }
 
@@ -78,6 +78,6 @@ else
         var randomNumber = new Random()
             .Next(0, _streams.Count);
 
-        // await _streams[randomNumber].PresentStream(JSRuntime, "stream");
+        await _streams[randomNumber].PresentStream(JsRuntime, "stream");
     }
 }
