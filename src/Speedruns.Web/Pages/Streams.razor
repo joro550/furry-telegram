@@ -12,33 +12,40 @@
 }
 else
 {
-<div class="row">
-    <div class="l1"></div>
-    <div id="stream" class="l10 video-container"></div>
-    <div class="l1"></div>
-</div>
-
-    foreach (var stream in _streams)
-    {
-        <div class="col s12 m3">
-            <div class="card horizontal">
-                <div class="card-image">
-                    <img src="https://lorempixel.com/100/190/nature/6">
-                </div>
-                <div class="card-stacked">
-                    <div class="card-content">
-                        <span class="card-title grey-text text-darken-4">
-                            @stream.Username - @stream.Title
-                        </span>
-                        <p>@stream.Description</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="#">This is a link</a>
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col l10 offset-l1">
+                <div id="stream" class="video-container">
+                    <iframe width="853" height="480" src="//www.youtube.com/embed/Q8TXgCzxEnw?rel=0" frameborder="0" allowfullscreen=""></iframe>
                 </div>
             </div>
         </div>
-    }
+    </div>
+
+    <div class="row">
+        @foreach (var stream in _streams)
+        {
+            <div class="col s12 m3">
+                <div class="card horizontal">
+                    <div class="card-image">
+                        <img src="https://lorempixel.com/100/190/nature/6">
+                    </div>
+                    <div class="card-stacked">
+                        <div class="card-content">
+                            <span class="card-title grey-text text-darken-4">
+                                @stream.Username - @stream.Title
+                            </span>
+                            <p>@stream.Description</p>
+                        </div>
+                        <div class="card-action">
+                            <a href="#">This is a link</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
 }
 
 @code {
@@ -49,8 +56,8 @@ else
         _streams = await StreamService.Get();
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await JSRuntime.InvokeVoidAsync("embedTwitch", "stream", "GamesDoneQuick");
-    }
+    // protected override async Task OnAfterRenderAsync(bool firstRender)
+    // {
+    //
+    // }
 }

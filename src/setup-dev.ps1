@@ -1,2 +1,2 @@
 docker-compose up -d
-dotnet-ef update-database
+dotnet ef database update --project .\Speedruns.Web\Speedruns.Web.csproj

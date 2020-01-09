@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Speedruns.Web.Areas.Identity;
 using Speedruns.Web.Data;
+using Speedruns.Web.Seed;
 
 namespace Speedruns.Web
 {
@@ -22,9 +23,10 @@ namespace Speedruns.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<DataSeeder>();
             services.AddDbContext<ApplicationDbContext>(options => 
                 options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
-            
+
             services.AddDefaultIdentity<IdentityUser>(
                     options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
