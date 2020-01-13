@@ -18,7 +18,7 @@ namespace Speedruns.Web.Data
             modelBuilder.Entity<StreamEntity>()
                 .HasDiscriminator(entity => entity.Platform)
                 .HasValue<TwitchStreamEntity>("Twitch")
-                .HasValue<MixerStreamEntiy>("Mixer");
+                .HasValue<MixerStreamEntity>("Mixer");
 
             base.OnModelCreating(modelBuilder);
         }

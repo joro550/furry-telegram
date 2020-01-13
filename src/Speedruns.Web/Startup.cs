@@ -24,10 +24,11 @@ namespace Speedruns.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            PlatformFactory.TwitchClient = new TwitchClient();
+            PlatformFactory.TwitchClient = new TwitchClient(_configuration.GetValue<string>("Twitch:ClientId"),
+                _configuration.GetValue<string>("Twitch:AccessToken"));
 
             services.AddTransient<DataSeeder>();
-            services.AddDbContext<ApplicationDbContext>(options => 
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDefaultIdentity<IdentityUser>(

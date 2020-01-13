@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
 COPY ["Speedruns.Web/Speedruns.Web.csproj", "Speedruns.Web/"]
+COPY ["Streamers.PlatformIntegration/Streamers.PlatformIntegration.csproj", "Streamers.PlatformIntegration/"]
 RUN dotnet restore "Speedruns.Web/Speedruns.Web.csproj"
 COPY . .
 WORKDIR "/src/Speedruns.Web"

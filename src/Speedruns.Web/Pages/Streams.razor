@@ -1,5 +1,6 @@
 ﻿@page "/streams/{streamName}"
 @page "/streams/"
+@page "/"
 
 @using Speedruns.Web.Data
 @inject StreamService StreamService
@@ -35,8 +36,8 @@ else
                             </span>
                             <p>@stream.Description</p>
                         </div>
-                        <div class="card-action">
-                            <a href="streams/{@stream.Username}">This is a link</a>
+                        <div class="card-action"> 
+                            <a href="streams/@stream.Username">This is a link</a>
                         </div>
                     </div>
                 </div>

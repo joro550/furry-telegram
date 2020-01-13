@@ -2,16 +2,18 @@ version: '3.4'
 
 services:
   speedruns.web:
-    container_name: speedruns-live
     image: ${DOCKER_REGISTRY-}speedrunsweb
     build:
       context: .
       dockerfile: Speedruns.Web/Dockerfile
+    depends_on:
+      - db
+
   db:
     container_name: speedruns-live-database
     image: "mcr.microsoft.com/mssql/server"
     environment:
-        SA_PASSWORD: "Your_password123"
-        ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
     ports:
-        - "2600:1433"
+      - "2600:1433"

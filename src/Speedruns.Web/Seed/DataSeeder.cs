@@ -28,9 +28,11 @@ namespace Speedruns.Web.Seed
                 var streamEntity = StreamEntity.Create(streamer.Platform);
                 var streamInformation = streamEntity.Execute(new GetStreamingInformation());
 
+                streamEntity.Username = streamer.Username;
                 streamEntity.Title = streamInformation.Title;
                 streamEntity.IsOnline = streamInformation.IsOnline;
                 streamEntity.Description = streamInformation.Description;
+
                 streams.Add(streamEntity);
             }
 
