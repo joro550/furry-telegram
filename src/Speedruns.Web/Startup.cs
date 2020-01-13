@@ -9,6 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Speedruns.Web.Areas.Identity;
 using Speedruns.Web.Data;
 using Speedruns.Web.Seed;
+using Streamers.PlatformIntegration;
 
 namespace Speedruns.Web
 {
@@ -23,6 +24,8 @@ namespace Speedruns.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            PlatformFactory.TwitchClient = new TwitchClient();
+
             services.AddTransient<DataSeeder>();
             services.AddDbContext<ApplicationDbContext>(options => 
                 options.UseSqlServer(_configuration.GetConnectionString("DefaultConnection")));

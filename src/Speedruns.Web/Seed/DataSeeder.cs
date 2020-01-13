@@ -1,6 +1,7 @@
-using Microsoft.EntityFrameworkCore.Internal;
 using Speedruns.Web.Data;
 using Speedruns.Web.Data.Entities;
+using System.Linq;
+using Speedruns.Web.Data.Queries;
 
 namespace Speedruns.Web.Seed
 {
@@ -17,44 +18,20 @@ namespace Speedruns.Web.Seed
         {
             _dbContext.Database.EnsureCreated();
 
-            if (!_dbContext.Streams.Any())
+            var streams = _dbContext.Streams;
+
+            foreach (var streamer in Streamers.StreamerList)
             {
-                _dbContext.Streams.Add(new TwitchStreamEntity
-                {
-                    Title = "Hello",
-                    IsOnline = true,
-                    Platform = "Twitch",
-                    Username = "GamesDoneQuick",
-                    Description = "Hello from AGDQ"
-                });
+                if(streams.Any(entity => entity.Username == streamer.Username))
+                    continue;
 
-                _dbContext.Streams.Add(new TwitchStreamEntity
-                {
-                    Title = "Hello",
-                    IsOnline = true,
-                    Platform = "Twitch",
-                    Username = "GamesDoneQuick",
-                    Description = "Hello from AGDQ"
-                });
+                var streamEntity = StreamEntity.Create(streamer.Platform);
+                var streamInformation = streamEntity.Execute(new GetStreamingInformation());
 
-                _dbContext.Streams.Add(new TwitchStreamEntity
-                {
-                    Title = "Hello",
-                    IsOnline = true,
-                    Platform = "Twitch",
-                    Username = "GamesDoneQuick",
-                    Description = "Hello from AGDQ"
-                });
-
-
-                _dbContext.Streams.Add(new TwitchStreamEntity
-                {
-                    Title = "Hello",
-                    IsOnline = true,
-                    Platform = "Twitch",
-                    Username = "GamesDoneQuick",
-                    Description = "Hello from AGDQ"
-                });
+                streamEntity.Title = streamInformation.Title;
+                streamEntity.IsOnline = streamInformation.IsOnline;
+                streamEntity.Description = streamInformation.Description;
+                streams.Add(streamEntity);
             }
 
             _dbContext.SaveChanges();

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Speedruns.Web", "Speedruns.
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{70CF890F-11F4-4307-B5A7-0728BAC7983C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streamers.PlatformIntegration", "Streamers.PlatformIntegration\Streamers.PlatformIntegration.csproj", "{ACA4F7E0-8C44-46C6-B756-FC4F5F02E11C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{70CF890F-11F4-4307-B5A7-0728BAC7983C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70CF890F-11F4-4307-B5A7-0728BAC7983C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70CF890F-11F4-4307-B5A7-0728BAC7983C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ACA4F7E0-8C44-46C6-B756-FC4F5F02E11C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACA4F7E0-8C44-46C6-B756-FC4F5F02E11C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACA4F7E0-8C44-46C6-B756-FC4F5F02E11C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACA4F7E0-8C44-46C6-B756-FC4F5F02E11C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

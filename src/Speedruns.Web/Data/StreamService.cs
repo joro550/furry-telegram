@@ -25,7 +25,6 @@ namespace Speedruns.Web.Data
                 Title = entity.Title,
                 Username = entity.Username
             }).ToList();
-
         }
     }
 }
