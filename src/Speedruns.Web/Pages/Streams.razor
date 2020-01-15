@@ -27,9 +27,8 @@ else
             <RadzenCard class="col-md-4">
                 <div class="row">
                     <div class="col-md-6">
-                        <RadzenImage Path="https://lorempixel.com/100/190/nature/6" />
+                        <RadzenImage Path="https://lorempixel.com/100/190/nature/6" ></RadzenImage>
                     </div>
-
                     <div class="col-md-6">
                         <b>@stream.Username - @stream.Title</b>
                         <p>@stream.Description</p>
@@ -54,6 +53,8 @@ else
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        if (!firstRender) return;
+
         if (string.IsNullOrEmpty(StreamName))
         {
             await ShowRandomStream();
