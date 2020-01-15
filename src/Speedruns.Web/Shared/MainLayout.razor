@@ -1,12 +1,47 @@
 ﻿@inherits LayoutComponentBase
 
-<NavMenu />
-<div class="row">
-    @* <div class="col s12 m4 l2"> *@
-    @*     <SideBar/> *@
-    @* </div> *@
+<RadzenDialog />
+<RadzenNotification />
 
-    <div class="col s12 m12 l12">
-        @Body
-    </div>
+<RadzenHeader>
+    <ChildContent>
+        <div class="row justify-content-start align-items-center">
+            <div class="col-6 d-flex align-items-center">
+                <RadzenSidebarToggle Click='@(args => { sidebar0.Toggle(); body0.Toggle(); })'>
+                </RadzenSidebarToggle>
+                <RadzenLabel Text='Speedruns'>
+                </RadzenLabel>
+            </div>
+        </div>
+    </ChildContent>
+</RadzenHeader>
+
+<div style="width:100%">
+    <RadzenBody @ref="@body0">
+        <ChildContent>
+            <RadzenContentContainer Name='main'>
+                @Body
+            </RadzenContentContainer>
+        </ChildContent>
+    </RadzenBody>
 </div>
+
+<RadzenSidebar @ref='@sidebar0'>
+    <ChildContent>
+        <RadzenPanelMenu>
+            <RadzenPanelMenuItem Text='Streams' Path='/streams' />
+        </RadzenPanelMenu>
+    </ChildContent>
+</RadzenSidebar>
+
+<RadzenFooter>
+    <ChildContent>
+        <RadzenLabel Text='Speedruns, Copyright &copy; 2019'>
+        </RadzenLabel>
+    </ChildContent>
+</RadzenFooter>
+
+@code {
+    RadzenSidebar sidebar0;
+    RadzenBody body0;
+}

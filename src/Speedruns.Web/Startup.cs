@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Radzen;
 using Speedruns.Web.Areas.Identity;
 using Speedruns.Web.Data;
 using Speedruns.Web.Seed;
@@ -41,6 +42,9 @@ namespace Speedruns.Web
 
             services.AddSingleton<WeatherForecastService>();
             services.AddTransient<StreamService>();
+            
+            services.AddScoped<DialogService>();
+            services.AddScoped<NotificationService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
