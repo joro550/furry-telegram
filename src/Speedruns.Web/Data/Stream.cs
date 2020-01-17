@@ -10,6 +10,7 @@ namespace Speedruns.Web.Data
         public bool IsOnline { get; set; }
         public string Platform { set; get; }
         public string Description { get; set; }
+        public string Game { get; set; }
 
         public async Task PresentStream(IJSRuntime runtime, string elementId) 
             => await runtime.InvokeVoidAsync("embedTwitch", elementId, Username);

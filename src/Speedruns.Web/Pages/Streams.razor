@@ -1,4 +1,4 @@
-﻿@page "/streams/{streamName}"
+@page "/streams/{streamName}"
 @page "/streams/"
 @page "/"
 
@@ -14,27 +14,23 @@ else
 {
     <div class="container">
         <div class="row">
-            <div class="col s12 m12 l9 offset-l1">
-                <div id="stream" class="video-container">
-                </div>
-            </div>
+            <div id="stream" class="embed-responsive embed-responsive-16by9"></div>
         </div>
     </div>
 
     <div class="row">
         @foreach (var stream in _streams)
         {
-            <RadzenCard class="col-md-4">
-                <div class="row">
-                    <div class="col-md-6">
-                        <RadzenImage Path="https://lorempixel.com/100/190/nature/6" ></RadzenImage>
-                    </div>
-                    <div class="col-md-6">
-                        <b>@stream.Username - @stream.Title</b>
-                        <p>@stream.Description</p>
-                    </div>
-                </div>
-            </RadzenCard>
+        <RadzenCard class="col-md-4">
+            <div class="card-header">
+                @stream.Username - @stream.Game
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">@stream.Title</h5>
+                <p class="card-text">@stream.Description</p>
+                <a href="/streams/@stream.Username" class="btn btn-primary">Watch</a>
+            </div>
+        </RadzenCard>
         }
     </div>
 
