@@ -1,32 +1,39 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
+using Speedruns.Web.Data.Commands;
 using Speedruns.Web.Data.Queries;
 
 namespace Speedruns.Web.Data.Entities
 {
     [Table("Stream")]
-    public class StreamEntity
+    public abstract class StreamEntity
     {
         [Key]
         public int Id { get; set; }
+
+        [NotNull]
         public string Username { get; set; }
-        public string Title { get; set; }
-        public bool IsOnline { get; set; }
-        public string Platform { set; get; }
-        public string Description { get; set; }
+        
+        [NotNull]
+        public Platform Platform { get; set; }
 
         public static StreamEntity Create(Platform platform)
         {
             return platform switch
             {
-                Entities.Platform.Twitch => (StreamEntity) new TwitchStreamEntity(),
-                Entities.Platform.Mixer => new MixerStreamEntity(),
+                Platform.Twitch => (StreamEntity) new TwitchStreamEntity(),
+                Platform.Mixer => new MixerStreamEntity(),
                 _ => new UnknownStreamEntity()
             };
         }
 
-        public virtual T Execute<T>(BaseQuery<T> query) 
+        public virtual Task<T> Execute<T>(BaseQuery<T> query) 
             => query.ForEntity(this);
+
+        public virtual Task Execute(BaseCommand command) 
+            => command.ForEntity(this);
     }
 
     public class UnknownStreamEntity : StreamEntity
@@ -35,17 +42,23 @@ namespace Speedruns.Web.Data.Entities
 
     public class TwitchStreamEntity : StreamEntity
     {
-        public override T Execute<T>(BaseQuery<T> query)
-        {
-            return base.Execute(query);
-        }
+        [NotNull]
+        [Column("ExternalId")]
+        public string ChannelId { get; set; }
+
+        public override Task<T> Execute<T>(BaseQuery<T> query) 
+            => query.ForTwitchStream(this);
+        
+        public override Task Execute(BaseCommand command) 
+            => command.ForTwitchStream(this);
+
     }
 
     public class MixerStreamEntity : StreamEntity
     {
-        public override T Execute<T>(BaseQuery<T> query)
-        {
-            return base.Execute(query);
-        }
+        public override Task<T> Execute<T>(BaseQuery<T> query) 
+            => query.ForMixerStream(this);
+        public override Task Execute(BaseCommand command) 
+            => command.ForMixerStream(this);
     }
 }

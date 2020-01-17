@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Speedruns.Web.Data;
+using Speedruns.Web.Data.Entities;
 
 namespace Speedruns.Web.Data.Migrations
 {
@@ -226,18 +227,8 @@ namespace Speedruns.Web.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsOnline")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Platform")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Platform")
+                        .HasColumnType("int");
 
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
@@ -246,25 +237,38 @@ namespace Speedruns.Web.Data.Migrations
 
                     b.ToTable("Stream");
 
-                    b.HasDiscriminator<string>("Platform").HasValue("StreamEntity");
+                    b.HasDiscriminator<int>("Platform");
                 });
 
-            modelBuilder.Entity("Speedruns.Web.Data.Entities.MixerStreamEntiy", b =>
+            modelBuilder.Entity("Speedruns.Web.Data.Entities.MixerStreamEntity", b =>
                 {
                     b.HasBaseType("Speedruns.Web.Data.Entities.StreamEntity");
 
                     b.ToTable("Stream");
 
-                    b.HasDiscriminator().HasValue("Mixer");
+                    b.HasDiscriminator().HasValue(2);
                 });
 
             modelBuilder.Entity("Speedruns.Web.Data.Entities.TwitchStreamEntity", b =>
                 {
                     b.HasBaseType("Speedruns.Web.Data.Entities.StreamEntity");
 
+                    b.Property<string>("ChannelId")
+                        .HasColumnName("ExternalId")
+                        .HasColumnType("nvarchar(max)");
+
                     b.ToTable("Stream");
 
-                    b.HasDiscriminator().HasValue("Twitch");
+                    b.HasDiscriminator().HasValue(1);
+                });
+
+            modelBuilder.Entity("Speedruns.Web.Data.Entities.UnknownStreamEntity", b =>
+                {
+                    b.HasBaseType("Speedruns.Web.Data.Entities.StreamEntity");
+
+                    b.ToTable("Stream");
+
+                    b.HasDiscriminator().HasValue(0);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

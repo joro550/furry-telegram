@@ -1,42 +1,55 @@
-using Speedruns.Web.Data;
-using Speedruns.Web.Data.Entities;
+using System;
 using System.Linq;
+using Speedruns.Web.Data;
+using System.Threading.Tasks;
 using Speedruns.Web.Data.Queries;
+using Speedruns.Web.Data.Entities;
+using Speedruns.Web.Data.Commands;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Speedruns.Web.Seed
 {
     public class DataSeeder
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly IServiceProvider _serviceProvider;
 
-        public DataSeeder(ApplicationDbContext dbContext)
-        {
-            _dbContext = dbContext;
-        }
+        public DataSeeder(IServiceProvider serviceProvider) 
+            => _serviceProvider = serviceProvider;
 
         public void Plant()
-        {
-            _dbContext.Database.EnsureCreated();
-
-            var streams = _dbContext.Streams;
-
-            foreach (var streamer in Streamers.StreamerList)
+            => Task.Run(async () =>
             {
-                if(streams.Any(entity => entity.Username == streamer.Username))
-                    continue;
+                using var scope = _serviceProvider.CreateScope();
+                await PlantAsync(scope.ServiceProvider.GetService<ApplicationDbContext>());
+            });
 
-                var streamEntity = StreamEntity.Create(streamer.Platform);
-                var streamInformation = streamEntity.Execute(new GetStreamingInformation());
+        private static async Task PlantAsync(ApplicationDbContext dbContext)
+        {
+            try
+            {
+                await dbContext.Database.EnsureCreatedAsync();
+                var streams = dbContext.Streams;
 
-                streamEntity.Username = streamer.Username;
-                streamEntity.Title = streamInformation.Title;
-                streamEntity.IsOnline = streamInformation.IsOnline;
-                streamEntity.Description = streamInformation.Description;
+                foreach (var streamer in Streamers.StreamerList)
+                {
+                    if (streams.Any(entity => entity.Username == streamer.Username))
+                        continue;
 
-                streams.Add(streamEntity);
+                    var streamEntity = StreamEntity.Create(streamer.Platform);
+                    var externalIdentifier = await streamEntity.Execute(new GetExternalIdentifier(streamer.Username));
+
+                    streamEntity.Username = streamer.Username;
+                    await streamEntity.Execute(new SetExternalIdentifier(externalIdentifier));
+
+                    await streams.AddAsync(streamEntity);
+                }
+
+                await dbContext.SaveChangesAsync();
             }
+            catch (Exception e)
+            {
 
-            _dbContext.SaveChanges();
+            }
         }
     }
 }

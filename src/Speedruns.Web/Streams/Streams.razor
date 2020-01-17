@@ -2,7 +2,7 @@
 @page "/streams/"
 @page "/"
 
-@using Speedruns.Web.Data
+@using Speedruns.Web.Streams.Retrievers
 @inject StreamService StreamService
 @inject IJSRuntime JsRuntime;
 
@@ -21,16 +21,16 @@ else
     <div class="row">
         @foreach (var stream in _streams)
         {
-        <RadzenCard class="col-md-4">
-            <div class="card-header">
-                @stream.Username - @stream.Game
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">@stream.Title</h5>
-                <p class="card-text">@stream.Description</p>
-                <a href="/streams/@stream.Username" class="btn btn-primary">Watch</a>
-            </div>
-        </RadzenCard>
+            <RadzenCard class="col-md-4">
+                <div class="card-header">
+                    @stream.Username
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@stream.Description</h5>
+                    <p class="card-text">@stream.Game</p>
+                    <a href="/streams/@stream.Username" class="btn btn-primary">Watch</a>
+                </div>
+            </RadzenCard>
         }
     </div>
 
@@ -44,12 +44,13 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        _streams = await StreamService.Get();
+        _streams = await StreamService.GetAsync();
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (!firstRender) return;
+        if (!firstRender) 
+            return;
 
         if (string.IsNullOrEmpty(StreamName))
         {

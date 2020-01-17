@@ -12,7 +12,8 @@ namespace Speedruns.Web
                 .SeedDatabase()
                 .Run();
 
-        private static IHostBuilder CreateHostBuilder(string[] args) =>
+        // ReSharper disable once MemberCanBePrivate.Global
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {

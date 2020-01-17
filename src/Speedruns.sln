@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Streamers.PlatformIntegrati
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{BA274F1A-CC73-473B-B7AA-7EE14E3BD0E6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TwitchTests", "..\TwitchTests\TwitchTests.csproj", "{C54FADAC-9FA5-4009-B0F4-5203751A782B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{BA274F1A-CC73-473B-B7AA-7EE14E3BD0E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA274F1A-CC73-473B-B7AA-7EE14E3BD0E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA274F1A-CC73-473B-B7AA-7EE14E3BD0E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C54FADAC-9FA5-4009-B0F4-5203751A782B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C54FADAC-9FA5-4009-B0F4-5203751A782B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C54FADAC-9FA5-4009-B0F4-5203751A782B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C54FADAC-9FA5-4009-B0F4-5203751A782B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

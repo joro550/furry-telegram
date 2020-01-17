@@ -15,12 +15,13 @@ namespace Speedruns.Web.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<StreamEntity>()
                 .HasDiscriminator(entity => entity.Platform)
-                .HasValue<TwitchStreamEntity>("Twitch")
-                .HasValue<MixerStreamEntity>("Mixer");
-
-            base.OnModelCreating(modelBuilder);
+                .HasValue<UnknownStreamEntity>(Platform.Unknown)
+                .HasValue<TwitchStreamEntity>(Platform.Twitch)
+                .HasValue<MixerStreamEntity>(Platform.Mixer);
         }
     }
 }

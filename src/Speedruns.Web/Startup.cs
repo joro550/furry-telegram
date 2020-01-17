@@ -10,6 +10,8 @@ using Radzen;
 using Speedruns.Web.Areas.Identity;
 using Speedruns.Web.Data;
 using Speedruns.Web.Seed;
+using Speedruns.Web.Streams;
+using Speedruns.Web.Streams.Retrievers;
 using Streamers.PlatformIntegration;
 
 namespace Speedruns.Web
@@ -40,7 +42,6 @@ namespace Speedruns.Web
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
 
-            services.AddSingleton<WeatherForecastService>();
             services.AddTransient<StreamService>();
             
             services.AddScoped<DialogService>();

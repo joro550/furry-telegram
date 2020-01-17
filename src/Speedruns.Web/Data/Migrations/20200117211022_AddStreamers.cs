@@ -2,7 +2,7 @@
 
 namespace Speedruns.Web.Data.Migrations
 {
-    public partial class AddStreams : Migration
+    public partial class AddStreamers : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,10 +13,8 @@ namespace Speedruns.Web.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Username = table.Column<string>(nullable: true),
-                    Title = table.Column<string>(nullable: true),
-                    IsOnline = table.Column<bool>(nullable: false),
-                    Platform = table.Column<string>(nullable: false),
-                    Description = table.Column<string>(nullable: true)
+                    Platform = table.Column<int>(nullable: false),
+                    ExternalId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

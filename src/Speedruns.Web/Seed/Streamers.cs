@@ -9,6 +9,7 @@ namespace Speedruns.Web.Seed
         {
             new Streamer { Platform = Platform.Twitch, Username = "joro550"},
             new Streamer { Platform = Platform.Twitch, Username = "GamesDoneQuick"},
+            new Streamer { Platform = Platform.Twitch, Username = "drdisrespect"},
         };
     }
 
